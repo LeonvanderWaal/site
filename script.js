@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const url = e.target.getAttribute("data-url");
             fetch(url)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch post content.");
+                    }
+                    return response.text();
+                })
                 .then(markdown => {
                     contentDiv.innerHTML = parseMarkdown(markdown);
                     blogList.parentElement.classList.add("hidden");
@@ -67,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     backButton.addEventListener("click", () => {
         postContent.classList.add("hidden");
         blogList.parentElement.classList.remove("hidden");
+        contentDiv.innerHTML = ""; // Clear the previous content
     });
 
     // Simple markdown parser (supports basic formatting)
