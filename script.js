@@ -40,14 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const url = e.target.getAttribute("data-url");
             fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch post content.");
-                    }
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(markdown => {
-                    contentDiv.innerHTML = parseMarkdown(markdown);
+                    // Use the 'marked' library to parse markdown to HTML
+                    const htmlContent = marked(markdown);
+
+                    // Update the content with parsed HTML
+                    contentDiv.innerHTML = htmlContent;
                     blogList.parentElement.classList.add("hidden");
                     postContent.classList.remove("hidden");
 
@@ -74,16 +73,4 @@ document.addEventListener("DOMContentLoaded", () => {
         blogList.parentElement.classList.remove("hidden");
         contentDiv.innerHTML = ""; // Clear the previous content
     });
-
-    // Simple markdown parser (supports basic formatting)
-    function parseMarkdown(text) {
-        return text
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
-            .replace(/\n/gim, '<br>');
-    }
 });
