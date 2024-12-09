@@ -46,15 +46,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     blogList.classList.add("hidden");
                     postContent.classList.remove("hidden");
 
-                    // Render LaTeX using KaTeX
+                    // Render LaTeX using KaTeX with support for environments like equation
                     renderMathInElement(contentDiv, {
                         delimiters: [
                             { left: "$$", right: "$$", display: true },
                             { left: "$", right: "$", display: false },
                             { left: "\\[", right: "\\]", display: true },
-                            { left: "\\(", right: "\\)", display: false }
+                            { left: "\\(", right: "\\)", display: false },
+                            { left: "\\begin{align}", right: "\\end{align}", display: true },
+                            { left: "\\begin{aligned}", right: "\\end{aligned}", display: true },
+                            { left: "\\begin{equation}", right: "\\end{equation}", display: true }  // custom delimiter for \begin{equation}
                         ],
-                        // Add custom options to support multiline LaTeX blocks
                         ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
                     });
                 })
