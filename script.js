@@ -42,11 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(url)
                 .then(response => response.text())
                 .then(markdown => {
-                    // Use the 'marked' library to parse markdown to HTML
-                    const htmlContent = marked(markdown);
-
-                    // Update the content with parsed HTML
+                    // console.log(markdown);
+                    const htmlContent = parseMarkdown(markdown);
                     contentDiv.innerHTML = htmlContent;
+                    console.log(htmlContent);
                     blogList.parentElement.classList.add("hidden");
                     postContent.classList.remove("hidden");
 
@@ -71,6 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
     backButton.addEventListener("click", () => {
         postContent.classList.add("hidden");
         blogList.parentElement.classList.remove("hidden");
-        contentDiv.innerHTML = ""; // Clear the previous content
     });
+
+    // Simple markdown parser (basic formatting)
+    function parseMarkdown(text) {
+        return text
+            .replace(/^# (.*$)/gm, '<h1>$1</h1>')        // H1 headers
+            .replace(/^## (.*$)/gm, '<h2>$1</h2>')       // H2 headers
+            .replace(/^### (.*$)/gm, '<h3>$1</h3>')      // H3 headers
+            .replace(/\*\*(.*?)\*\*/gm, '<strong>$1</strong>') // Bold text
+            .replace(/\*(.*?)\*/gm, '<em>$1</em>')       // Italics
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/gm, '<a href="$2" target="_blank">$1</a>') // Links
+            .replace(/\n/gm, '<br>');                     // Line breaks
+    }
 });
