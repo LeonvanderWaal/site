@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById("content");
     const backButton = document.getElementById("back-button");
 
-    // Replace these with your actual GitHub details
     const username = "LeonvanderWaal";
     const repo = "site";
     const branch = "main";
@@ -42,10 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(url)
                 .then(response => response.text())
                 .then(markdown => {
-                    // console.log(markdown);
                     const htmlContent = parseMarkdown(markdown);
                     contentDiv.innerHTML = htmlContent;
-                    console.log(htmlContent);
                     blogList.classList.add("hidden");
                     postContent.classList.remove("hidden");
 
@@ -56,7 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             { left: "$", right: "$", display: false },
                             { left: "\\[", right: "\\]", display: true },
                             { left: "\\(", right: "\\)", display: false }
-                        ]
+                        ],
+                        // Add custom options to support multiline LaTeX blocks
+                        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
                     });
                 })
                 .catch(error => {
