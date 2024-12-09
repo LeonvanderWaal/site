@@ -1,4 +1,8 @@
+/* General body and layout styles */
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
@@ -6,6 +10,7 @@ body {
     padding: 0;
 }
 
+/* Header styling */
 header {
     background-color: #4a5568;
     color: #fff;
@@ -13,8 +18,11 @@ header {
     text-align: center;
 }
 
+/* Main container styling with a wider content */
 .container {
-    max-width: 700px;
+    flex: 1;
+    width: 100%;            /* Take full width for smaller screens */
+    max-width: 800pt;/* Increased max-width to make the content wider */
     margin: 2em auto;
     padding: 2em;
     background: #fff;
@@ -22,10 +30,12 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Headings styling */
 h2 {
     color: #2d3748;
 }
 
+/* List styling */
 ul {
     list-style: none;
     padding: 0;
@@ -35,6 +45,7 @@ li {
     margin: 1em 0;
 }
 
+/* Link styling */
 a {
     text-decoration: none;
     color: #4a5568;
@@ -46,10 +57,12 @@ a:hover {
     color: #2b6cb0;
 }
 
+/* Hidden class styling for hidden elements */
 .hidden {
     display: none;
 }
 
+/* Styling for post content */
 #post-content {
     margin-top: 2em;
 }
@@ -59,6 +72,7 @@ a:hover {
     line-height: 1.6;
 }
 
+/* Button styling */
 button {
     padding: 0.5em 1em;
     background-color: #4a5568;
@@ -73,10 +87,27 @@ button:hover {
     background-color: #2b6cb0;
 }
 
+/* Footer styling */
 footer {
     text-align: center;
     background-color: #4a5568;
     color: #fff;
     padding: 1em;
     margin-top: 2em;
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    li {
+        font-size: 1em;
+    }
 }
