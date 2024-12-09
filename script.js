@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const htmlContent = parseMarkdown(markdown);
                     contentDiv.innerHTML = htmlContent;
                     console.log(htmlContent);
-                    blogList.parentElement.classList.add("hidden");
+                    blogList.classList.add("hidden");
                     postContent.classList.remove("hidden");
 
                     // Render LaTeX using KaTeX
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Back button functionality
     backButton.addEventListener("click", () => {
         postContent.classList.add("hidden");
-        blogList.parentElement.classList.remove("hidden");
+        blogList.classList.remove("hidden");
     });
 
     // Simple markdown parser (basic formatting)
