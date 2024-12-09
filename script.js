@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const backButton = document.getElementById("back-button");
 
     // Replace these with your actual GitHub details
-    const username = "YOUR_GITHUB_USERNAME";
-    const repo = "YOUR_REPO_NAME";
+    const username = "LeonvanderWaal";
+    const repo = "site";
     const branch = "main";
     const folder = "blog";
 
